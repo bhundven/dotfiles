@@ -1,1 +1,1 @@
-/home/bryan/git-meld/git-meld.pl
+../git-meld/git-meld.pl
