@@ -11,7 +11,7 @@ set background=dark
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "koehler"
+let g:colors_name = "koehler2"
 hi Normal		  guifg=white  guibg=black
 hi Scrollbar	  guifg=darkcyan guibg=cyan
 hi Menu			  guifg=black guibg=cyan
