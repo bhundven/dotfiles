@@ -1,5 +1,5 @@
 # bhundven’s dotfiles
-Note, this is a partial fork of (Mathias Bynens)(http://mathiasbynens.be/) dotfiles, because mine is different (Linux, not Mac).
+Note, this is a partial fork of [Mathias Bynens](http://mathiasbynens.be/) dotfiles, because mine is different (Linux, not Mac).
 
 ## Installation
 
