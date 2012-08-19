@@ -8,21 +8,36 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+OPENEMBEDDED_ENABLED=true
+
 EDITOR=vim
 
 # if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
+if [ -n "${BASH_VERSION}" ]; then
+  # include .bashrc if it exists
+  if [ -f "${HOME}/.bashrc" ]; then
+    . "${HOME}/.bashrc"
+  fi
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "${HOME}/bin" ] ; then
+  PATH="${HOME}/bin:${PATH}"
 fi
 
-PATH="${HOME}/android-sdk-linux/tools:${HOME}/android-sdk-linux/platform-tools:${PATH}"
+if [ -d "${HOME}/ctng/bin" ] ; then
+  PATH="${HOME}/ctng/bin:${PATH}"
+fi
 
-export EDITOR PATH
+if [ -d "${HOME}/android-sdk-linux_x86/tools" -a -d "${HOME}/android-sdk-linux_x86/platform-tools" ] ; then
+  PATH="${HOME}/android-sdk-linux_x86/tools:${HOME}/android-sdk-linux_x86/platform-tools:${PATH}"
+fi
+
+keychain id_rsa
+[ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+[ -f $HOME/.keychain/$HOSTNAME-sh ] &&
+  . $HOME/.keychain/$HOSTNAME-sh
+[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
+  . $HOME/.keychain/$HOSTNAME-sh-gpg
+
+# vim: ts=2 sw=2 et ai
