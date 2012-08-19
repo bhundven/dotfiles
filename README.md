@@ -30,4 +30,4 @@ Suggestions/improvements
 
 ## Thanks to…
 * [Mathias Bynens](http://mathiasbynens.be/)
-* And everyone he thanks in his [dotfiles README](https://github.com/mathiasbynens/dotfiles/blob/master/README.md)
+* And everyone he thanks in his [dotfiles README](https://github.com/mathiasbynens/dotfiles/blob/master/README.md#thanks-to%E2%80%A6)
