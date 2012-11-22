@@ -33,6 +33,13 @@ if [ -d "${HOME}/android-sdk-linux_x86/tools" -a -d "${HOME}/android-sdk-linux_x
   PATH="${HOME}/android-sdk-linux_x86/tools:${HOME}/android-sdk-linux_x86/platform-tools:${PATH}"
 fi
 
+if [ -d "/usr/lib/ccache" ]; then
+  PATH="/usr/lib/ccache:$PATH"
+  [ ! -d "${HOME}/.ccache" ] && mkdir -p "${HOME}/.ccache"
+  export CCACHE_DIR=${HOME}/.ccache
+  ccache -M10G
+fi
+
 keychain id_rsa
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
