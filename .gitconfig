@@ -76,3 +76,5 @@
 [user]
 	name = Bryan Hundven
 	email = bryanhundven@gmail.com
+[push]
+	default = current
