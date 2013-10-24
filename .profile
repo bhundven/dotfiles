@@ -29,8 +29,8 @@ if [ -d "${HOME}/ctng/bin" ] ; then
   PATH="${HOME}/ctng/bin:${PATH}"
 fi
 
-if [ -d "${HOME}/android-sdk-linux_x86/tools" -a -d "${HOME}/android-sdk-linux_x86/platform-tools" ] ; then
-  PATH="${HOME}/android-sdk-linux_x86/tools:${HOME}/android-sdk-linux_x86/platform-tools:${PATH}"
+if [ -d "/opt/android-sdk/sdk/tools" -a -d "/opt/android-sdk/sdk/platform-tools" ] ; then
+  PATH="/opt/android-sdk/sdk/tools:/opt/android-sdk/sdk/platform-tools:${PATH}"
 fi
 
 keychain -q id_rsa
