@@ -33,7 +33,7 @@ if [ -d "${HOME}/android-sdk-linux_x86/tools" -a -d "${HOME}/android-sdk-linux_x
   PATH="${HOME}/android-sdk-linux_x86/tools:${HOME}/android-sdk-linux_x86/platform-tools:${PATH}"
 fi
 
-keychain id_rsa
+keychain -q id_rsa
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
   . $HOME/.keychain/$HOSTNAME-sh
