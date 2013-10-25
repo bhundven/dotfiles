@@ -3,6 +3,7 @@ cd "$(dirname "$0")"
 git pull
 git submodule init
 git submodule update
+cd repo-mm; git submodule init && git submodule update; cd ..
 function doIt() {
 	rsync --exclude ".git/" --exclude ".gitmodules" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av . ~
 }
