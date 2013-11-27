@@ -40,6 +40,11 @@ if [ -d "/opt/eclipse" ]; then
   PATH="/opt/eclipse:$PATH"
 fi
 
+# Android-Studio
+if [ -d "/opt/android-studio/bin" ]; then
+  PATH="/opt/android-studio/bin:$PATH"
+fi
+
 # ssh/gpg keychain
 keychain -q id_rsa
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
