@@ -25,14 +25,17 @@ if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
+# Crosstool-ng
 if [ -d "${HOME}/ctng/bin" ] ; then
   PATH="${HOME}/ctng/bin:${PATH}"
 fi
 
+# Android SDK
 if [ -d "/opt/android-sdk/sdk/tools" -a -d "/opt/android-sdk/sdk/platform-tools" ] ; then
   PATH="/opt/android-sdk/sdk/tools:/opt/android-sdk/sdk/platform-tools:${PATH}"
 fi
 
+# ssh/gpg keychain
 keychain -q id_rsa
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
