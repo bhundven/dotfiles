@@ -35,6 +35,11 @@ if [ -d "/opt/android-sdk/sdk/tools" -a -d "/opt/android-sdk/sdk/platform-tools"
   PATH="/opt/android-sdk/sdk/tools:/opt/android-sdk/sdk/platform-tools:${PATH}"
 fi
 
+# Eclipse
+if [ -d "/opt/eclipse" ]; then
+  PATH="/opt/eclipse:$PATH"
+fi
+
 # ssh/gpg keychain
 keychain -q id_rsa
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
