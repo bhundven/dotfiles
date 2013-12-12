@@ -1,1 +1,0 @@
-../git-meld/git-meld.pl
