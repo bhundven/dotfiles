@@ -18,3 +18,7 @@ else
 fi
 unset doIt
 source ~/.profile
+
+# Update google's repo command:
+curl -o "${HOME}/bin/repo" http://commondatastorage.googleapis.com/git-repo-downloads/repo
+chmod u+x "${HOME}/bin/repo"
