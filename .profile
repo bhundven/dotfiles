@@ -53,4 +53,12 @@ keychain -q id_rsa
 [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
   . $HOME/.keychain/$HOSTNAME-sh-gpg
 
+# Setup ccache
+if [ "$(which ccache)" != "" ]; then
+  export CCACHE_DIR="${HOME}/.ccache"
+  export CCACHE_BASEDIR="/build"
+  # For Android
+  export USE_CCACHE=1
+fi
+
 # vim: ts=2 sw=2 et ai
