@@ -1,0 +1,3 @@
+#!/bin/bash
+#set -x
+vimdiff $1 $2
