@@ -55,7 +55,13 @@ keychain -q id_rsa
 
 # Setup ccache
 if [ "$(which ccache)" != "" ]; then
+  # Default GCC is now ccache
+  if [ -d "/usr/lib/ccache" ]; then
+    PATH="/usr/lib/ccache:${PATH}"
+  fi
+  # ccache dir
   export CCACHE_DIR="${HOME}/.ccache"
+  # only builds in /build will be cached
   export CCACHE_BASEDIR="/build"
   # For Android
   export USE_CCACHE=1
