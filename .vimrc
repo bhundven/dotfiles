@@ -3,6 +3,17 @@
 " Description: My .vimrc
 " Last Modified: August 18, 2012
 
+" Setup pathogen early {{{1
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" Do auto indentation {{{1
+filetype on
+if has("autocmd")
+  filetype plugin indent on
+endif
+
 " Drop compatibility with older vi(m) {{{1
 set nocompatible
 set backspace=indent,eol,start  " more powerful backspacing
@@ -10,8 +21,6 @@ set backspace=indent,eol,start  " more powerful backspacing
 " load some shipped plugins {{{1
 runtime macros/matchit.vim
 runtime ftplugin/main.vim
-call pathogen#infect()
-call pathogen#helptags()
 
 " Now we set some defaults for the editor {{{1
 set history=50  " keep 50 lines of command line history
@@ -54,11 +63,6 @@ set laststatus=2
 " Jump to the last position when reopening a file {{{1
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" Do auto indentation {{{1
-if has("autocmd")
-  filetype plugin indent on
 endif
 
 " Spell Checking {{{1
