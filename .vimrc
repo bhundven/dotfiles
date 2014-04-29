@@ -78,5 +78,9 @@ let g:snips_author = 'Bryan Hundven'
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 nmap <silent> <leader>l :set list!<CR>
 
+" Quickly edit/reload the vimrc file {{{1
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
 " }}}
 " vim: nowrap:foldmethod=marker:ts=2:sw=2:sts=2:et:ai
