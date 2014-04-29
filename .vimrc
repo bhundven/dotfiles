@@ -5,7 +5,7 @@
 
 " Setup pathogen early {{{1
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
 
 " Do auto indentation {{{1
