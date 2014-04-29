@@ -74,7 +74,7 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 " snipmate settings {{{1
 let g:snips_author = 'Bryan Hundven'
 
-" Toggle invisible characters (,l)
+" Toggle invisible characters (,l) {{{1
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 nmap <silent> <leader>l :set list!<CR>
 
