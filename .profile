@@ -45,13 +45,17 @@ if [ -d "/opt/android-studio/bin" ]; then
   PATH="/opt/android-studio/bin:$PATH"
 fi
 
-# ssh/gpg keychain
-keychain -q id_rsa
-[ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-[ -f $HOME/.keychain/$HOSTNAME-sh ] &&
-  . $HOME/.keychain/$HOSTNAME-sh
-[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
-  . $HOME/.keychain/$HOSTNAME-sh-gpg
+# No need to run keychain on Mac OS X.
+# I normally use the normal built-in "Keychain Access" stuff.
+if [ "$(uname)" != "Darwin" ]; then
+  # ssh/gpg keychain
+  keychain -q id_rsa
+  [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+  [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
+    . $HOME/.keychain/$HOSTNAME-sh
+  [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
+    . $HOME/.keychain/$HOSTNAME-sh-gpg
+fi
 
 # Setup ccache
 if [ "$(which ccache)" != "" ]; then
