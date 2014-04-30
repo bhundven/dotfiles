@@ -65,11 +65,17 @@ if [ "$(which ccache)" != "" ]; then
   # Default GCC is now ccache
   if [ -d "/usr/lib/ccache" ]; then
     PATH="/usr/lib/ccache:${PATH}"
+  elif [ -d "/usr/local/opt/ccache/libexec" ]; then
+    # we're on Mac OS X with HomeBrew
+    PATH="/usr/local/opt/ccache/libexec:${PATH}"
   fi
   # ccache dir
   export CCACHE_DIR="${HOME}/.ccache"
-  # only builds in /build will be cached
-  export CCACHE_BASEDIR="/build"
+  # Don't set a BASEDIR on MAC OS X
+  if [ "$(uname)" != "Darwin" ]; then
+    # only builds in /build will be cached
+    export CCACHE_BASEDIR="/build"
+  fi
   # For Android
   export USE_CCACHE=1
 fi
