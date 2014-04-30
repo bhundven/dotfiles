@@ -40,9 +40,12 @@ if [ -d "/opt/eclipse" ]; then
   PATH="/opt/eclipse:$PATH"
 fi
 
-# Android-Studio
-if [ -d "/opt/android-studio/bin" ]; then
-  PATH="/opt/android-studio/bin:$PATH"
+# Android-Studio is a .app, so skip this path!
+if [ "$(uname)" != "Darwin" ]; then
+  # Android-Studio
+  if [ -d "/opt/android-studio/bin" ]; then
+    PATH="/opt/android-studio/bin:$PATH"
+  fi
 fi
 
 # No need to run keychain on Mac OS X.
