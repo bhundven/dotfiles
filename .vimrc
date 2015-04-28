@@ -41,6 +41,7 @@ set vb t_vb=        " disable the visual bell
 set wildmenu        " enables a menu at the bottom of the vim/gvim window.
 set modeline        " enable modelines.
 set modelines=5     " search for modelines 5 lines at the beginning and end of a file.
+set shell=/bin/bash " make the default shell bash
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
@@ -85,6 +86,73 @@ nmap <silent> <leader>l :set list!<CR>
 " Quickly edit/reload the vimrc file {{{1
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Map Tagbar to F8 {{{1
+nmap <F8> :TagbarToggle<CR>
+
+" vim-go settings {{{1
+
+" Disable opening browser after posting to your snippet to play.golang.org:
+"let g:go_play_open_browser = 0
+
+" By default vim-go shows errors for the fmt command, to disable it:
+"let g:go_fmt_fail_silently = 1
+
+" Enable goimports to automatically insert import paths instead of gofmt:
+let g:go_fmt_command = "goimports"
+
+" Disable auto fmt on save:
+"let g:go_fmt_autosave = 0
+
+" By default binaries are installed to $GOBIN or $GOPATH/bin. To change it:
+"let g:go_bin_path = expand("~/.gotools")
+"let g:go_bin_path = "/home/fatih/.mypath"      "or give absolute path
+
+" By default syntax-highlighting for Functions, Methods and Structs is
+" disabled. To change it:
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+" Map vim-go commands {{{1
+
+" Run commands, such as go run with <leader>r for the current file or go build
+" and go test for the current package with <leader>b and <leader>t. Display a
+" beautiful annotated source code to see which functions are covered with
+" <leader>c.
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>gi <Plug>(go-install)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+" By default the mapping gd is enabled which opens the target identifier in
+" current buffer. You can also open the definition/declaration in a new
+" vertical, horizontal or tab for the word under your cursor:
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+" Open the relevant Godoc for the word under the cursor with <leader>gd or
+" open it vertically with <leader>gv
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+" Or open the Godoc in browser
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+" Show a list of interfaces which is implemented by the type under your cursor
+" with <leader>s
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+" Show type info for the word under your cursor with <leader>i (useful if you
+" have disabled auto showing type info via g:go_auto_type_info)
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+" Rename the identifier under the cursor to a new name
+au FileType go nmap <Leader>e <Plug>(go-rename)
 
 " }}}
 " vim: nowrap:foldmethod=marker:ts=2:sw=2:sts=2:et:ai
