@@ -20,54 +20,76 @@ if [ -n "${BASH_VERSION}" ]; then
   fi
 fi
 
-# set PATH so it includes user's private bin if it exists
+# setexport PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/bin" ] ; then
-  PATH="${HOME}/bin:${PATH}"
+ export PATH="${HOME}/bin:${PATH}"
+fi
+
+# setexport PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/.local/bin" ] ; then
+ export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
 # Crosstool-ng
 if [ -d "${HOME}/ctng/bin" ] ; then
-  PATH="${HOME}/ctng/bin:${PATH}"
+ export PATH="${HOME}/ctng/bin:${PATH}"
 fi
 
 # Android SDK
 if [ -d "/opt/android-sdk/sdk/tools" -a -d "/opt/android-sdk/sdk/platform-tools" ] ; then
-  PATH="/opt/android-sdk/sdk/tools:/opt/android-sdk/sdk/platform-tools:${PATH}"
+ export PATH="/opt/android-sdk/sdk/tools:/opt/android-sdk/sdk/platform-tools:${PATH}"
+fi
+
+# GOLang
+if [ -d "/opt/go/bin" ]; then
+  export GOROOT="/opt/go"
+  export PATH="$GOROOT/bin:${PATH}"
+  if [ -d "${HOME}/go/bin" ]; then
+    export GOPATH="${HOME}/go"
+    export PATH="${GOPATH}/bin:${PATH}"
+  fi
+fi
+
+# clion
+if [ -d "/opt/clion/" ]; then
+  if [ -d "/opt/clion/bin" ]; then
+    export PATH="/opt/clion/bin:${PATH}"
+  fi
 fi
 
 # Eclipse
 if [ -d "/opt/eclipse" ]; then
-  PATH="/opt/eclipse:$PATH"
+ export PATH="/opt/eclipse:$PATH"
 fi
 
 # Android-Studio is a .app, so skip this path!
 if [ "$(uname)" != "Darwin" ]; then
   # Android-Studio
   if [ -d "/opt/android-studio/bin" ]; then
-    PATH="/opt/android-studio/bin:$PATH"
+   export PATH="/opt/android-studio/bin:$PATH"
   fi
 fi
 
 # No need to run keychain on Mac OS X.
 # I normally use the normal built-in "Keychain Access" stuff.
-if [ "$(uname)" != "Darwin" ]; then
-  # ssh/gpg keychain
-  keychain -q id_rsa
-  [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-  [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
-    . $HOME/.keychain/$HOSTNAME-sh
-  [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
-    . $HOME/.keychain/$HOSTNAME-sh-gpg
-fi
+#if [ "$(uname)" != "Darwin" ]; then
+#  # ssh/gpg keychain
+#  keychain -q id_rsa
+#  [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+#  [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
+#    . $HOME/.keychain/$HOSTNAME-sh
+#  [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
+#    . $HOME/.keychain/$HOSTNAME-sh-gpg
+#fi
 
 # Setup ccache
 if [ "$(which ccache)" != "" ]; then
   # Default GCC is now ccache
   if [ -d "/usr/lib/ccache" ]; then
-    PATH="/usr/lib/ccache:${PATH}"
+   export PATH="/usr/lib/ccache:${PATH}"
   elif [ -d "/usr/local/opt/ccache/libexec" ]; then
     # we're on Mac OS X with HomeBrew
-    PATH="/usr/local/opt/ccache/libexec:${PATH}"
+   export PATH="/usr/local/opt/ccache/libexec:${PATH}"
   fi
   # ccache dir
   export CCACHE_DIR="${HOME}/.ccache"

@@ -15,9 +15,11 @@ function doIt() {
   git clone https://github.com/tomtom/tlib_vim
   git clone https://github.com/MarcWeber/vim-addon-mw-utils
   git clone https://github.com/fatih/vim-go
-  git clone https://github.com/garbas/vim-snipmate
   git clone https://github.com/honza/vim-snippets
   git clone https://github.com/christoomey/vim-tmux-navigator
+  git clone https://github.com/vim-airline/vim-airline
+  git clone https://github.com/vim-airline/vim-airline-themes
+  git clone https://github.com/Xuyuanp/nerdtree-git-plugin
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -31,7 +33,3 @@ else
 fi
 unset doIt
 source ~/.profile
-
-# Update google's repo command:
-curl -o "${HOME}/bin/repo" https://storage.googleapis.com/git-repo-downloads/repo
-chmod u+x "${HOME}/bin/repo"

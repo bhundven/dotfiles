@@ -90,69 +90,33 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Map Tagbar to F8 {{{1
 nmap <F8> :TagbarToggle<CR>
 
-" vim-go settings {{{1
-
-" Disable opening browser after posting to your snippet to play.golang.org:
-"let g:go_play_open_browser = 0
-
-" By default vim-go shows errors for the fmt command, to disable it:
-"let g:go_fmt_fail_silently = 1
-
-" Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_command = "goimports"
-
-" Disable auto fmt on save:
-"let g:go_fmt_autosave = 0
-
-" By default binaries are installed to $GOBIN or $GOPATH/bin. To change it:
-"let g:go_bin_path = expand("~/.gotools")
-"let g:go_bin_path = "/home/fatih/.mypath"      "or give absolute path
-
-" By default syntax-highlighting for Functions, Methods and Structs is
-" disabled. To change it:
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-" Map vim-go commands {{{1
-
-" Run commands, such as go run with <leader>r for the current file or go build
-" and go test for the current package with <leader>b and <leader>t. Display a
-" beautiful annotated source code to see which functions are covered with
-" <leader>c.
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>gi <Plug>(go-install)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-" By default the mapping gd is enabled which opens the target identifier in
-" current buffer. You can also open the definition/declaration in a new
-" vertical, horizontal or tab for the word under your cursor:
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-" Open the relevant Godoc for the word under the cursor with <leader>gd or
-" open it vertically with <leader>gv
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-" Or open the Godoc in browser
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-
-" Show a list of interfaces which is implemented by the type under your cursor
-" with <leader>s
-au FileType go nmap <Leader>s <Plug>(go-implements)
-
-" Show type info for the word under your cursor with <leader>i (useful if you
-" have disabled auto showing type info via g:go_auto_type_info)
-au FileType go nmap <Leader>i <Plug>(go-info)
-
-" Rename the identifier under the cursor to a new name
-au FileType go nmap <Leader>e <Plug>(go-rename)
+" Setup NerdTree {{{1
+" Toggle NERDTree
+nmap <silent> <leader>k :NERDTreeToggle<cr>
+" " expand to the path of the file in the current buffer
+nmap <silent> <leader>y :NERDTreeFind<cr>
+"
+let NERDTreeShowHidden=1
+let NERDTreeDirArrowExpandable = '▷'
+let NERDTreeDirArrowCollapsible = '▼'
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+map <C-n> :NERDTreeToggle<CR>
 
 " }}}
+
+" Setup Airline {{{1
+" airline options
+let g:airline_powerline_fonts=1
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+let g:airline_theme='cool'
+let g:airline#extensions#tabline#enabled = 1 " enable airline tabline
+let g:airline#extensions#tabline#tab_min_count = 2 " only show tabline if tabs are being used (more than 1 tab open)
+let g:airline#extensions#tabline#show_buffers = 0 " do not show open buffers in tabline
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
 " vim: nowrap:foldmethod=marker:ts=2:sw=2:sts=2:et:ai
