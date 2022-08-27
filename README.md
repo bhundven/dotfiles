@@ -1,5 +1,4 @@
 # bhundven’s dotfiles
-Note, this is a partial fork of [Mathias Bynens](http://mathiasbynens.be/) dotfiles, because mine is different (Linux, not Mac).
 
 ## Installation
 
@@ -27,7 +26,3 @@ Alternatively, to update while avoiding the confirmation prompt:
 
 Suggestions/improvements
 [welcome](https://github.com/bhundven/dotfiles/issues)!
-
-## Thanks to…
-* [Mathias Bynens](http://mathiasbynens.be/)
-* And everyone he thanks in his [dotfiles README](https://github.com/mathiasbynens/dotfiles/blob/master/README.md#thanks-to%E2%80%A6)
