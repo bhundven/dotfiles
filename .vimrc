@@ -158,6 +158,7 @@ let g:plugins = {
 \ 'vim-gitgutter': 'https://github.com/airblade/vim-gitgutter.git',
 \ 'vim-hug-neovim-rpc': 'https://github.com/roxma/vim-hug-neovim-rpc.git',
 \ 'vim-puppet': 'https://github.com/rodjek/vim-puppet.git',
+\ 'awesome-vim-colorschemes': 'https://github.com/rafi/awesome-vim-colorschemes.git',
 \}
 
 nnoremap <silent> <leader>u :call GetOrUpdatePlugins()<CR>
