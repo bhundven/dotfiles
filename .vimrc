@@ -86,7 +86,6 @@ nnoremap <Leader>vr :source $MYVIMRC<CR>
 
 " load some shipped plugins {{{1
 runtime macros/matchit.vim
-runtime ftplugin/main.vim
 
 " Spell Checking {{{1
 " Toggle spell checking on and off with `,s`
