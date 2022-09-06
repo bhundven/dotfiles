@@ -3,6 +3,9 @@
 " Description: My .vimrc
 " Last Modified: September 1, 2022
 
+" List of unicode characters:
+" https://en.wikipedia.org/wiki/List_of_Unicode_characters
+
 " Basic Vim Settings {{{1
 set nocompatible
 let &termencoding = &encoding
@@ -33,8 +36,9 @@ endif
 set backspace=indent,eol,start
 
 " Set invisible characters {{{2
+" eol:⍇,tab:▶<space>,space:·,trail:<space>,lead:<space>
 set listchars=eol:\\U00002347,tab:\\U000025B6\\U00000020,space:\\U000000B7
-      \,trail:\\U000000B7
+      \,trail:\\U000000B7,lead:\\U000000B7
 
 " Don't wrap lines
 set nowrap
@@ -133,8 +137,8 @@ nmap <silent> <leader>k :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 "
 let NERDTreeShowHidden=1
-let NERDTreeDirArrowExpandable = '▷'
-let NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeDirArrowExpandable = "\u25B7"
+let NERDTreeDirArrowCollapsible = "\u25BC"
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
