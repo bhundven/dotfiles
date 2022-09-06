@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: August 26, 2022
+" Last Modified: September 1, 2022
 
 " Basic Vim Settings {{{1
 set nocompatible
@@ -147,6 +147,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
 " Our dictionary of vim plugins {{{2
 let g:plugins = {
 \ 'ale': 'https://github.com/dense-analysis/ale.git',
+\ 'ansible-vim': 'https://github.com/pearofducks/ansible-vim.git',
 \ 'deoplete.nvim' : 'https://github.com/Shougo/deoplete.nvim.git',
 \ 'nerdtree': 'https://github.com/preservim/nerdtree.git',
 \ 'nvim-yarp': 'https://github.com/roxma/nvim-yarp.git',
