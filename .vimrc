@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: September 1, 2022
+" Last Modified: September 6, 2022
 
 " List of unicode characters:
 " https://en.wikipedia.org/wiki/List_of_Unicode_characters
@@ -166,6 +166,8 @@ let g:plugins = {
 \ 'vim-puppet': 'https://github.com/rodjek/vim-puppet.git',
 \ 'awesome-vim-colorschemes':
 \ 'https://github.com/rafi/awesome-vim-colorschemes.git',
+\ 'vim-gist': 'https://github.com/mattn/vim-gist.git',
+\ 'webapi-vim': 'https://github.com/mattn/webapi-vim.git',
 \}
 
 " Load All Vim Plugins {{{1
