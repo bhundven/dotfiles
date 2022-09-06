@@ -93,7 +93,7 @@ runtime macros/matchit.vim
 
 " Spell Checking {{{1
 " Toggle spell checking on and off with `,s`
-nmap <silent> <leader>s :set spell!<CR>
+nnoremap <silent> <leader>s :set spell!<CR>
 
 " Use deoplete completion {{{1
 let g:ale_completion_enabled = 1
@@ -128,13 +128,13 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 nnoremap <silent> <leader>l :set list!<CR>
 
 " Map Tagbar to F8 {{{1
-nmap <F8> :TagbarToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " Setup NerdTree {{{1
 " Toggle NERDTree
-nmap <silent> <leader>k :NERDTreeToggle<cr>
+nnoremap <silent> <leader>k :NERDTreeToggle<CR>
 " " expand to the path of the file in the current buffer
-nmap <silent> <leader>y :NERDTreeFind<cr>
+nnoremap <silent> <leader>y :NERDTreeFind<CR>
 "
 let NERDTreeShowHidden=1
 let NERDTreeDirArrowExpandable = "\u25B7"
@@ -147,6 +147,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
 "map <C-n> :NERDTreeToggle<CR>
 
 " Get or Update Plugins {{{1
+nnoremap <silent> <leader>u :call GetOrUpdatePlugins()<CR>
 
 " Our dictionary of vim plugins {{{2
 let g:plugins = {
@@ -163,10 +164,9 @@ let g:plugins = {
 \ 'vim-gitgutter': 'https://github.com/airblade/vim-gitgutter.git',
 \ 'vim-hug-neovim-rpc': 'https://github.com/roxma/vim-hug-neovim-rpc.git',
 \ 'vim-puppet': 'https://github.com/rodjek/vim-puppet.git',
-\ 'awesome-vim-colorschemes': 'https://github.com/rafi/awesome-vim-colorschemes.git',
+\ 'awesome-vim-colorschemes':
+\ 'https://github.com/rafi/awesome-vim-colorschemes.git',
 \}
-
-nnoremap <silent> <leader>u :call GetOrUpdatePlugins()<CR>
 
 " Load All Vim Plugins {{{1
 " Load all plugins now.
