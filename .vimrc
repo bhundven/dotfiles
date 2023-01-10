@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: September 21, 2022
+" Last Modified: January 10, 2023
 
 " List of unicode characters:
 " https://en.wikipedia.org/wiki/List_of_Unicode_characters
@@ -170,6 +170,7 @@ let g:plugins = {
 \ 'webapi-vim': 'https://github.com/mattn/webapi-vim.git',
 \ 'Jenkinsfile-vim-syntax':
 \ 'https://github.com/martinda/Jenkinsfile-vim-syntax.git',
+\ 'vim-virtualenv': 'https://github.com/jmcantrell/vim-virtualenv',
 \}
 
 " Setup Gist {{{1
