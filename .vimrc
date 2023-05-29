@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: January 10, 2023
+" Last Modified: May 29, 2023
 
 " List of unicode characters:
 " https://en.wikipedia.org/wiki/List_of_Unicode_characters
@@ -69,17 +69,6 @@ if has("autocmd")
         \ exe "normal! g'\"" | endif
 endif
 
-" Show cursor line and cursor column on the current buffer {{{2
-set cursorline cursorcolumn
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-
-" Set ColorColumn for the current buffer {{{2
-execute "set colorcolumn=" . join(range(81,1000), ',')
-au WinLeave * set colorcolumn=
-au WinEnter * execute "set colorcolumn=" . join(range(81,1000), ',')
-highlight ColorColumn ctermbg=darkgrey ctermfg=red
-
 " Edit and Reload vim config file {{{2
 "
 " Edit vimrc configuration file {{{3
@@ -87,6 +76,26 @@ nnoremap <Leader>ve :e $MYVIMRC<CR>
 
 " Reload vimrc configuration file {{{3
 nnoremap <Leader>vr :source $MYVIMRC<CR>
+
+" Show cursor line and cursor column on the current buffer {{{1
+set cursorline cursorcolumn
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+" Set ColorColumn for the current buffer {{{2
+execute "set colorcolumn=" . join(range(81,1000), ',')
+set cursorline
+au WinLeave * set colorcolumn=
+au WinEnter * execute "set colorcolumn=" . join(range(81,1000), ',')
+highlight ColorColumn ctermbg=darkgrey ctermfg=red
+" ColorColumn toggle {{{2
+nnoremap <leader>cc :call ColorColumnToggle()<cr>
+function! ColorColumnToggle()
+  if &colorcolumn
+    set colorcolumn=
+  else
+    execute "set colorcolumn=" . join(range(81,1000), ',')
+  endif
+endfunction
 
 " load some shipped plugins {{{1
 runtime macros/matchit.vim
@@ -170,7 +179,9 @@ let g:plugins = {
 \ 'webapi-vim': 'https://github.com/mattn/webapi-vim.git',
 \ 'Jenkinsfile-vim-syntax':
 \ 'https://github.com/martinda/Jenkinsfile-vim-syntax.git',
-\ 'vim-virtualenv': 'https://github.com/jmcantrell/vim-virtualenv',
+\ 'vim-virtualenv': 'https://github.com/jmcantrell/vim-virtualenv.git',
+\ 'vim-surround': 'https://github.com/tpope/vim-surround.git',
+\ 'vim-repeat': 'https://github.com/tpope/vim-repeat.git',
 \}
 
 " Setup Gist {{{1
@@ -179,6 +190,7 @@ let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 let g:gist_browser_command = 'open %URL%'
 let g:gist_show_privates = 1
+let g:gist_get_multiplefile = 1
 
 " Load All Vim Plugins {{{1
 " Load all plugins now.
