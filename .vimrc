@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: May 29, 2023
+" Last Modified: Mar 13, 2024
 
 " Basic Vim Settings {{{1
 set nocompatible
@@ -23,7 +23,9 @@ set modeline
 set modelines=5
 
 " Centralize backups, swapfiles and undo history {{{2
-set backupdir=~/.vim/backups
+if exists("&backupdir")
+  set backupdir=~/.vim/backups
+endif
 set directory=~/.vim/swaps
 if exists("&undodir")
   set undodir=~/.vim/undo
@@ -56,8 +58,15 @@ filetype indent on
 syntax on
 colorscheme gotham256
 
+" OS Detection
+let g:uname = system('uname -s')
+
 " Make the default shell bash {{{2
-set shell=/bin/bash
+if g:uname == "Linux"
+  set shell=/bin/bash
+elseif g:uname == "Darwin"
+  set shell=/opt/homebrew/bin/bash
+endif
 
 " Automatically save before commands like :next and :make {{{2
 set autowrite
@@ -67,6 +76,9 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
         \ exe "normal! g'\"" | endif
 endif
+
+" Set pyenv python {{{2
+let &pythonthreedll = trim(system("pyenv which python"))
 
 " Edit and Reload vim config file {{{2
 "
@@ -103,17 +115,30 @@ runtime macros/matchit.vim
 " Toggle spell checking on and off with `,s`
 nnoremap <silent> <leader>s :set spell!<CR>
 
-" Use deoplete completion {{{1
+" ALE Configuration {{{1
 let g:ale_completion_enabled = 1
-
-" Enable deoplete on startup {{{1
-let g:deoplete#enable_at_startup = 1
+set omnifunc=syntaxcomplete#Complete
+set omnifunc=ale#completion#OmniFunc
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+au BufRead,BufNewFile */.github/*/*.y{,a}ml
+\  let b:ale_linters = {'yaml': ['actionlint']}
 
 " Don't automatically align... yet... {{{1
 let g:puppet_align_hashes = 0
 
 " GitGutter Settings {{{1
-let g:gitgutter_git_executable = '/usr/bin/git'
+if g:uname == "Linux"
+  let g:gitgutter_git_executable = '/usr/bin/git'
+elseif g:uname == "Darwin"
+  let g:gitgutter_git_executable = '/opt/homebrew/bin/git'
+endif
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_linenrs = 1
+" GitGutter Toggle {{{2
+nnoremap <leader>gg :GitGutterToggle<cr>
 
 " Airline settings {{{1
 " Airline options {{{2
@@ -161,7 +186,6 @@ nnoremap <silent> <leader>u :call GetOrUpdatePlugins()<CR>
 let g:plugins = {
 \ 'ale': 'https://github.com/dense-analysis/ale.git',
 \ 'ansible-vim': 'https://github.com/pearofducks/ansible-vim.git',
-\ 'deoplete.nvim' : 'https://github.com/Shougo/deoplete.nvim.git',
 \ 'nerdtree': 'https://github.com/preservim/nerdtree.git',
 \ 'nvim-yarp': 'https://github.com/roxma/nvim-yarp.git',
 \ 'rust.vim': 'https://github.com/rust-lang/rust.vim',
@@ -170,7 +194,6 @@ let g:plugins = {
 \ 'vim-airline-themes': 'https://github.com/vim-airline/vim-airline-themes.git',
 \ 'vim-fugitive': 'https://github.com/tpope/vim-fugitive.git',
 \ 'vim-gitgutter': 'https://github.com/airblade/vim-gitgutter.git',
-\ 'vim-hug-neovim-rpc': 'https://github.com/roxma/vim-hug-neovim-rpc.git',
 \ 'vim-puppet': 'https://github.com/rodjek/vim-puppet.git',
 \ 'awesome-vim-colorschemes':
 \ 'https://github.com/rafi/awesome-vim-colorschemes.git',
@@ -179,8 +202,11 @@ let g:plugins = {
 \ 'Jenkinsfile-vim-syntax':
 \ 'https://github.com/martinda/Jenkinsfile-vim-syntax.git',
 \ 'vim-virtualenv': 'https://github.com/jmcantrell/vim-virtualenv.git',
+\ 'vim-pyenv': 'https://github.com/lambdalisue/vim-pyenv.git',
 \ 'vim-surround': 'https://github.com/tpope/vim-surround.git',
 \ 'vim-repeat': 'https://github.com/tpope/vim-repeat.git',
+\ 'vim-hcl': 'https://github.com/jvirtanen/vim-hcl.git',
+\ 'vim-trivy': 'https://github.com/aquasecurity/vim-trivy.git',
 \}
 
 " Setup Gist {{{1
