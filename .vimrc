@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: Mar 13, 2024
+" Last Modified: Aug 12, 2024
 
 " Basic Vim Settings {{{1
 set nocompatible
@@ -23,9 +23,7 @@ set modeline
 set modelines=5
 
 " Centralize backups, swapfiles and undo history {{{2
-if exists("&backupdir")
-  set backupdir=~/.vim/backups
-endif
+set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
   set undodir=~/.vim/undo
@@ -77,8 +75,10 @@ if has("autocmd")
         \ exe "normal! g'\"" | endif
 endif
 
-" Set pyenv python {{{2
-let &pythonthreedll = trim(system("pyenv which python"))
+" Set pyenv python for MacOS {{{2
+if g:uname == "Darwin"
+  let &pythonthreedll = trim(system("pyenv which python"))
+endif
 
 " Edit and Reload vim config file {{{2
 "
@@ -87,6 +87,9 @@ nnoremap <Leader>ve :e $MYVIMRC<CR>
 
 " Reload vimrc configuration file {{{3
 nnoremap <Leader>vr :source $MYVIMRC<CR>
+
+" Custom Command {{{2
+command! -nargs=1 R :!clear && <args>
 
 " Show cursor line and cursor column on the current buffer {{{1
 set cursorline cursorcolumn
@@ -117,13 +120,13 @@ nnoremap <silent> <leader>s :set spell!<CR>
 
 " ALE Configuration {{{1
 let g:ale_completion_enabled = 1
-set omnifunc=syntaxcomplete#Complete
+
 set omnifunc=ale#completion#OmniFunc
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \}
-au BufRead,BufNewFile */.github/*/*.y{,a}ml
+au BufRead,BufNewFile */.github/workflows/*/*.y{,a}ml
 \  let b:ale_linters = {'yaml': ['actionlint']}
 
 " Don't automatically align... yet... {{{1
@@ -179,6 +182,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) &&
       \| endif
 "map <C-n> :NERDTreeToggle<CR>
 
+" Setup vim-terraform {{{1
+let g:hcl_align=1
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
 " Get or Update Plugins {{{1
 nnoremap <silent> <leader>u :call GetOrUpdatePlugins()<CR>
 
@@ -207,6 +215,7 @@ let g:plugins = {
 \ 'vim-repeat': 'https://github.com/tpope/vim-repeat.git',
 \ 'vim-hcl': 'https://github.com/jvirtanen/vim-hcl.git',
 \ 'vim-trivy': 'https://github.com/aquasecurity/vim-trivy.git',
+\ 'vim-terraform': 'https://github.com/hashivim/vim-terraform.git',
 \}
 
 " Setup Gist {{{1
