@@ -1,9 +1,10 @@
 " File: .vimrc
 " Author: Bryan Hundven
 " Description: My .vimrc
-" Last Modified: Aug 12, 2024
+" Last Modified: Jan 24, 2025
 
 " Basic Vim Settings {{{1
+set keyprotocol=ghostty:kitty
 set nocompatible
 let &termencoding = &encoding
 set encoding=utf-8
@@ -75,16 +76,12 @@ if has("autocmd")
         \ exe "normal! g'\"" | endif
 endif
 
-" Set pyenv python for MacOS {{{2
-if g:uname == "Darwin"
-  let &pythonthreedll = trim(system("pyenv which python"))
-endif
+" Set python3 to pyenv shim {{{2
+let &pythonthreedll = trim(system("pyenv which python"))
 
 " Edit and Reload vim config file {{{2
-"
 " Edit vimrc configuration file {{{3
 nnoremap <Leader>ve :e $MYVIMRC<CR>
-
 " Reload vimrc configuration file {{{3
 nnoremap <Leader>vr :source $MYVIMRC<CR>
 
@@ -93,40 +90,40 @@ command! -nargs=1 R :!clear && <args>
 
 " Show cursor line and cursor column on the current buffer {{{1
 set cursorline cursorcolumn
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-" Set ColorColumn for the current buffer {{{2
-execute "set colorcolumn=" . join(range(81,1000), ',')
-set cursorline
-au WinLeave * set colorcolumn=
-au WinEnter * execute "set colorcolumn=" . join(range(81,1000), ',')
-highlight ColorColumn ctermbg=darkgrey ctermfg=red
-" ColorColumn toggle {{{2
+
+" ColorColumn toggle {{{1
 nnoremap <leader>cc :call ColorColumnToggle()<cr>
 function! ColorColumnToggle()
   if &colorcolumn
     set colorcolumn=
   else
     execute "set colorcolumn=" . join(range(81,1000), ',')
+    highlight ColorColumn ctermbg=darkgrey ctermfg=red
   endif
 endfunction
 
 " load some shipped plugins {{{1
 runtime macros/matchit.vim
 
+" Setup some filetypes {{{1
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0 autoindent
+
 " Spell Checking {{{1
 " Toggle spell checking on and off with `,s`
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " ALE Configuration {{{1
+let g:ale_c_parse_makefile = 1
+let g:ale_parse_compile_commands = 1
 let g:ale_completion_enabled = 1
-
+set omnifunc=syntaxcomplete#Complete
 set omnifunc=ale#completion#OmniFunc
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \}
-au BufRead,BufNewFile */.github/workflows/*/*.y{,a}ml
+au BufRead,BufNewFile */.github/workflows/*.y{,a}ml
 \  let b:ale_linters = {'yaml': ['actionlint']}
 
 " Don't automatically align... yet... {{{1
@@ -134,8 +131,10 @@ let g:puppet_align_hashes = 0
 
 " GitGutter Settings {{{1
 if g:uname == "Linux"
+  let g:fugitive_git_executable = '/usr/bin/git'
   let g:gitgutter_git_executable = '/usr/bin/git'
 elseif g:uname == "Darwin"
+  let g:fugitive_git_executable = '/opt/homebrew/bin/git'
   let g:gitgutter_git_executable = '/opt/homebrew/bin/git'
 endif
 let g:gitgutter_highlight_lines = 1
@@ -216,6 +215,7 @@ let g:plugins = {
 \ 'vim-hcl': 'https://github.com/jvirtanen/vim-hcl.git',
 \ 'vim-trivy': 'https://github.com/aquasecurity/vim-trivy.git',
 \ 'vim-terraform': 'https://github.com/hashivim/vim-terraform.git',
+\ 'vim-go': 'https://github.com/fatih/vim-go.git',
 \}
 
 " Setup Gist {{{1
@@ -236,4 +236,5 @@ packloadall!
 silent! helptags ALL
 " }}}
 "
+hi Normal guibg=NONE ctermbg=NONE
 " vim: ts=2:sw=2:sts=2:et:ai
